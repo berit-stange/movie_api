@@ -8,9 +8,94 @@
 </head>
 <body>
     <h1>Documentation</h1>
-    <p>The web application will provide users with access to <br>
-        information about different movies, directors, and genres. <br> 
-        Users will be able to sign up, update their personal information, <br>
-        and create a list of their favorite movies.</p>
+
+    <h2>For every endpoint in this API</h2>
+    <ul>
+        <li>Description of what kind of data the endpoint returns</li>
+        <li>The endpoint URL</li>
+        <li>The method type (GET, POST, PUT, or DELETE)</li>
+        <li>The query parameters (parameters in the URL)</li>
+        <li>The format of data expected in the body of the request (and an example)</li>
+        <li>The format of the response data</li>
+        <li>An example request</li>
+        <li>An example response</li>
+    </ul>
+
+    <table  border="1">
+        <thead>
+            <tr>
+                <th>Business Logic</th>
+                <th>URL</th>
+                <th>HTTP Method</th>
+                <th>Request Body data format</th>
+                <th>Response Body data format</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Return a list of ALL movies to the user</td>
+                <td>/movies</td>
+                <td>GET</td>
+                <td>---</td>
+                <td>A JSON object containing title and image of every movie</td>
+            </tr>
+            <tr>
+                <td>Return data about movie by title to the user</td>
+                <td>/movies/[title]</td>
+                <td>GET</td>
+                <td>---</td>
+                <td>A JSON object containing title, year, director, image and actors of every movie</td>
+            </tr>
+            <tr>
+                <td>Return data about a genre (description) by name</td>
+                <td>genres/[name]</td>
+                <td>GET</td>
+                <td>---</td>
+                <td>A JSON object containing description of genre</td>
+            </tr>
+            <tr>
+                <td>Return data about a director (bio, birth year, death year, work) by name</td>
+                <td>/directors/[name]</td>
+                <td>GET</td>
+                <td>---</td>
+                <td>A JSON object containing description of genre</td>
+            </tr>
+            <tr>
+                <td>Allow new users to register</td>
+                <td>/users</td>
+                <td>POST</td>
+                <td>JSON object containing user data</td>
+                <td>JSON object containing user data that was just added</td>
+            </tr>
+            <tr>
+                <td>Allow users to update their user info (username)</td>
+                <td>/users/[username]</td>
+                <td>PUT</td>
+                <td>JSON object containing user data</td>
+                <td>JSON object containing user data that was just updated</td>
+            </tr>
+            <tr>
+                <td>Allow users to add a movie to their list of favorites</td>
+                <td>/users/[username]/favorites</td>
+                <td>POST</td>
+                <td>JSON object containing movie data</td>
+                <td>JSON object containing movie data that was just added</td>
+            </tr>
+            <tr>
+                <td>Allow users to remove a movie from their list of favorites</td>
+                <td>/users/[username]/favorites</td>
+                <td>DELETE</td>
+                <td>---</td>
+                <td>A text message saying the movie was successfully deleted</td>
+            </tr>
+            <tr>
+                <td>Allow existing users to deregister</td>
+                <td>/users/[username]</td>
+                <td>DELETE</td>
+                <td>---</td>
+                <td>A text message saying the account was successfully deleted</td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
