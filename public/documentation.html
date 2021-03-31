@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
+<body style="padding: 30px;">
     <h1>Documentation</h1>
 
     <h2>For every endpoint in this API</h2>
@@ -21,7 +21,7 @@
         <li>An example response</li>
     </ul>
 
-    <table  border="1">
+    <table  border="1" style="border-collapse:collapse;">
         <thead>
             <tr>
                 <th>Business Logic</th>
@@ -33,63 +33,63 @@
         </thead>
         <tbody>
             <tr>
-                <td>Return a list of ALL movies to the user</td>
+                <td>1. Return a list of ALL movies to the user</td>
                 <td>/movies</td>
                 <td>GET</td>
                 <td>---</td>
                 <td>A JSON object containing title and image of every movie</td>
             </tr>
             <tr>
-                <td>Return data about movie by title to the user</td>
+                <td>2. Return data about movie by title to the user</td>
                 <td>/movies/[title]</td>
                 <td>GET</td>
                 <td>---</td>
                 <td>A JSON object containing title, year, director, image and actors of every movie</td>
             </tr>
             <tr>
-                <td>Return data about a genre (description) by name</td>
+                <td>3. Return data about a genre (description) by name</td>
                 <td>genres/[name]</td>
                 <td>GET</td>
                 <td>---</td>
                 <td>A JSON object containing description of genre</td>
             </tr>
             <tr>
-                <td>Return data about a director (bio, birth year, death year, work) by name</td>
+                <td>4. Return data about a director (bio, birth year, death year, work) by name</td>
                 <td>/directors/[name]</td>
                 <td>GET</td>
                 <td>---</td>
                 <td>A JSON object containing description of genre</td>
             </tr>
             <tr>
-                <td>Allow new users to register</td>
+                <td>5. Allow new users to register</td>
                 <td>/users</td>
                 <td>POST</td>
                 <td>JSON object containing user data</td>
                 <td>JSON object containing user data that was just added</td>
             </tr>
             <tr>
-                <td>Allow users to update their user info (username)</td>
+                <td>6. Allow users to update their user info (username)</td>
                 <td>/users/[username]</td>
                 <td>PUT</td>
                 <td>JSON object containing user data</td>
                 <td>JSON object containing user data that was just updated</td>
             </tr>
             <tr>
-                <td>Allow users to add a movie to their list of favorites</td>
+                <td>7. Allow users to add a movie to their list of favorites</td>
                 <td>/users/[username]/favorites</td>
                 <td>POST</td>
                 <td>JSON object containing movie data</td>
                 <td>JSON object containing movie data that was just added</td>
             </tr>
             <tr>
-                <td>Allow users to remove a movie from their list of favorites</td>
+                <td>8. Allow users to remove a movie from their list of favorites</td>
                 <td>/users/[username]/favorites</td>
                 <td>DELETE</td>
                 <td>---</td>
                 <td>A text message saying the movie was successfully deleted</td>
             </tr>
             <tr>
-                <td>Allow existing users to deregister</td>
+                <td>9. Allow existing users to deregister</td>
                 <td>/users/[username]</td>
                 <td>DELETE</td>
                 <td>---</td>
@@ -97,5 +97,389 @@
             </tr>
         </tbody>
     </table>
+
+    <h2>Request and Response data</h2>
+
+    <h3>1. Return a list of ALL movies to the user</h3>
+    <p>GET /movies</p>
+    <h4>Request</h4>
+    <pre>
+        <code>
+            app.get('/movies', (req, res) => {
+                Movies.find()
+                .then((movies) => {
+                res.status(201).json(movies);
+                })
+                .catch((err) => {
+                console.error(err);
+                res.status(500).send('Error ' + err);
+                });
+            });
+        </code>
+    </pre>
+    <h4>Example Response</h4>
+    <pre>
+        <code>
+        {
+            "_id" : ObjectId("6062405328ca23c4e049871b"),
+            "Title" : "Adams Apples",
+            "Description" : "Adam (Ulrich Thomsen), a former neo-Nazi, is temporarily assigned to live in a religious enclave. The community is led by Ivan (Mads Mikkelsen), an eternally optimistic priest. In order to move forward with his rehabilitation, Adam must select a task, so he decides to bake an apple pie. However, his simple choice is complicated by having to use apples from a tree that is plagued by problems.",
+            "Genre" : {
+                    "Name" : "Black Comedy",
+                    "Description" : "Black comedy is a relatively broad term covering humor relating to many serious subjects."
+            },
+            "Director" : {
+                    "Name" : "Anders Thomas Jensen",
+                    "Bio" : "Danish screenwriter and film director. After being nominated two previous years Jensen finally won in 1999 an Oscar for best short film with Election Night (1998).",
+                    "Movies" : [ ],
+                    "Birth" : "1972",
+                    "Death" : ""
+            },
+            "ImagePath" : "https://m.media-amazon.com/images/M/MV5BMTU4NTc5NjM5M15BMl5BanBnXkFtZTgwODEyMTE0MDE@._V1_FMjpg_UX1000_.jpg",
+            "Actors" : [
+                    "Mads Mikkelsen",
+                    "Nicolas Bro"
+            ],
+            "ReleaseYear" : "2015",
+            "Featured" : true
+    }
+    {
+            "_id" : ObjectId("6062411e28ca23c4e049871d"),
+            "Title" : "Men & Chicken",
+            "Description" : "Two outcast brothers, through getting to know their unknown family, discover a horrible truth about themselves and their relatives.",
+            "Genre" : {
+                    "Name" : "Black Comedy",
+                    "Description" : "Black comedy is a relatively broad term covering humor relating to many serious subjects."
+            },
+            "Director" : {
+                    "Name" : "Anders Thomas Jensen",
+                    "Bio" : "Danish screenwriter and film director. After being nominated two previous years Jensen finally won in 1999 an Oscar for best short film with Election Night (1998).",
+                    "Movies" : [ ],
+                    "Birth" : "1972",
+                    "Death" : ""
+            },
+            "ImagePath" : "https://m.media-amazon.com/images/M/MV5BMTcwMjI0OTgxM15BMl5BanBnXkFtZTgwNDg3MzczODE@._V1_FMjpg_UX1000_.jpg",
+            "Actors" : [
+                    "Mads Mikkelsen",
+                    "Nicolas Bro"
+            ],
+            "ReleaseYear" : "2015",
+            "Featured" : false
+    }
+        </code>
+    </pre>
+
+    <h3>2. Return data about movie by title to the user</h3>
+    <p>GET /movies/[title]</p>
+    <h4>Request</h4>
+    <pre>
+        <code>
+            app.get('/movies/:Title', (req, res) => {
+                Movies.findOne({ Title: req.params.Title })
+                .then((movie) => {
+                  res.json(movie);
+                })
+                .catch((err) => {
+                  console.error(err);
+                  res.status(500).send('Error: ' + err);
+                });
+              });
+        </code>
+    </pre>
+    <h4>Example Response</h4>
+    <pre>
+        <code>
+            {
+                "Genre": {
+                    "Name": "Black Comedy",
+                    "Description": "Black comedy is a relatively broad term covering humor relating to many serious subjects."
+                },
+                "Director": {
+                    "Movies": [],
+                    "Name": "Anders Thomas Jensen",
+                    "Bio": "Danish screenwriter and film director. After being nominated two previous years Jensen finally won in 1999 an Oscar for best short film with Election Night (1998).",
+                    "Birth": "1972",
+                    "Death": ""
+                },
+                "Actors": [
+                    "Mads Mikkelsen",
+                    "Nicolas Bro"
+                ],
+                "_id": "6062405328ca23c4e049871b",
+                "Title": "Adams Apples",
+                "Description": "Adam (Ulrich Thomsen), a former neo-Nazi, is temporarily assigned to live in a religious enclave. The community is led by Ivan (Mads Mikkelsen), an eternally optimistic priest. In order to move forward with his rehabilitation, Adam must select a task, so he decides to bake an apple pie. However, his simple choice is complicated by having to use apples from a tree that is plagued by problems.",
+                "ImagePath": "https://m.media-amazon.com/images/M/MV5BMTU4NTc5NjM5M15BMl5BanBnXkFtZTgwODEyMTE0MDE@._V1_FMjpg_UX1000_.jpg",
+                "ReleaseYear": "2015",
+                "Featured": true
+            }
+        </code>
+    </pre>
+
+    <h3>3. Return data about a genre (description) by name</h3>
+    <p>GET genres/[name]</p>
+    <h4>Request</h4>
+    <pre>
+        <code>
+            app.get('/movies/genres/:Name', (req, res) => {
+                Movies.findOne({ "Genre.Name": req.params.Name })
+                .then((movie) => {
+                  res.json(movie.Genre);
+                })
+                .catch((err) => {
+                  console.error(err);
+                  res.status(500).send('Error: ' + err);
+                });
+              });
+        </code>
+    </pre>
+    <h4>Example Response</h4>
+    <pre>
+        <code>
+            {
+                "Name": "Black Comedy",
+                "Description": "Black comedy is a relatively broad term covering humor relating to many serious subjects."
+            }
+        </code>
+    </pre>
+
+    <h3>4. Return data about a director (bio, birth year, death year, work) by name</h3>
+    <p>GET directors/[name]</p>
+    <h4>Request</h4>
+    <pre>
+        <code>
+            app.get('/movies/directors/:Name', (req, res) => {
+                Movies.findOne({ "Director.Name": req.params.Name })
+                .then((movie) => {
+                  res.json(movie.Director);
+                })
+                .catch((err) => {
+                  console.error(err);
+                  res.status(500).send('Error: ' + err);
+                });
+              });
+        </code>
+    </pre>
+    <h4>Example Response</h4>
+    <pre>
+        <code>
+            {
+                "Movies": [],
+                "Name": "Anders Thomas Jensen",
+                "Bio": "Danish screenwriter and film director. After being nominated two previous years Jensen finally won in 1999 an Oscar for best short film with Election Night (1998).",
+                "Birth": "1972",
+                "Death": ""
+            }
+        </code>
+    </pre>
+
+    <h3>5. Allow new users to register</h3>
+    <p>POST /users</p>
+    <h4>Request</h4>
+    <pre>
+        <code>
+            app.post('/users', (req, res) => {
+                Users.findOne({ Username: req.body.Username })//check if a user with the username provided by the client already exists
+                .then((user) => {
+                  if (user) {
+                    return res.status(400).send(req.body.Username + 'already exists');
+                  } else {
+                    Users.create({
+                      Username: req.body.Username,
+                      Password: req.body.Password,
+                      Email: req.body.Email,
+                      Birthday: req.body.Birthday
+                    })
+                    .then((user) =>{res.status(201).json(user)})
+                  .catch((error) => {
+                    console.error(error);
+                    res.status(500).send('Error: ' + error);
+                  })
+                  }
+                })
+                .catch((error) => {
+                  console.error(error);
+                  res.status(500).send('Error: ' + error);
+                });
+              });
+        </code>
+        <code>
+            {
+                "Username": "Donald Trump",
+                "Password": "lovemyself",
+                "Email": "donnie@yoga-retreat-bali.com",
+                "Birthday": "+019554-12-31T23:00:00.000Z"
+            }
+        </code>
+    </pre>
+    <h4>Example Response</h4>
+    <pre>
+        <code>
+            {
+                "Username": "Donald Trump",
+                "Password": "lovemyself",
+                "Email": "donnie@yoga-retreat-bali.com",
+                "Birthday": "+019554-12-31T23:00:00.000Z"
+            }
+        </code>
+    </pre>
+
+    <h3>6. Allow users to update their user info (username)</h3>
+    <p>PUT /users/[username]</p>
+    <h4>Request</h4>
+    <pre>
+        <code>
+            app.put('/users/:Username', (req, res) => {
+                Users.findOneAndUpdate({ Username: req.params.Username }, {$set:
+                  {
+                    Username: req.body.Username,
+                    Password: req.body.Password,
+                    Email: req.body.Email,
+                    Birthday: req.body.Birthday
+                  }
+                },
+                { new: true }, //makes sure updated info is returned
+                (err, updatedUser) => {
+                  if(err) {
+                    console.error(err);
+                    res.status(500).send('Error: ' + err);
+                  } else {
+                    res.json(updatedUser);
+                  }
+                });
+              });
+        </code>
+        <code>
+            {
+                "Username": "Donald Trump",
+                "Password": "donnie123",
+                "Email": "donnie@yoga-retreat-bali.com",
+                "Birthday": "+019554-12-31T23:00:00.000Z"
+            }
+        </code>
+    </pre>
+    <h4>Example Response</h4>
+    <pre>
+        <code>
+            {
+                "Username": "Donald Trump",
+                "Password": "donnie123",
+                "Email": "donnie@yoga-retreat-bali.com",
+                "Birthday": "+019554-12-31T23:00:00.000Z"
+            }
+        </code>
+    </pre>
+
+    <h3>7. Allow users to add a movie to their list of favorites</h3>
+    <p>	POST /users/[username]/favorites/[movieid]</p>
+    <h4>Request</h4>
+    <pre>
+        <code>
+            app.post('/users/:Username/favorites/:MovieID', (req, res) => {
+                Users.findOneAndUpdate({ Username: req.params.Username }, {
+                   $push: { FavoriteMovies: req.params.MovieID }
+                 },
+                 { new: true }, // This line makes sure that the updated document is returned
+                (err, updatedUser) => {
+                  if (err) {
+                    console.error(err);
+                    res.status(500).send('Error: ' + err);
+                  } else {
+                    res.json(updatedUser);
+                  }
+                });
+              });
+        </code>
+        <code>
+            {
+                "FavoriteMovies": "6060f576f71bd9e1cc6e8e73"
+            }
+        </code>
+    </pre>
+    <h4>Example Response</h4>
+    <pre>
+        <code>
+            {
+                "FavoriteMovies": [
+                    "6060f576f71bd9e1cc6e8e73"
+                ],
+                "_id": "6064b6751b9ebb2598d5d4ce",
+                "Username": "Donald Trump",
+                "Password": "donnie123",
+                "Email": "donnie@yoga-retreat-bali.com",
+                "Birthday": "+019554-12-31T23:00:00.000Z",
+                "__v": 0
+            }
+        </code>
+    </pre>
+
+    <h3>8. Allow users to remove a movie from their list of favorites</h3>
+    <p>DELETE /users/[username]/favorites/[movieid]</p>
+    <h4>Request</h4>
+    <pre>
+        <code>
+            app.delete('/users/:Username/favorites/:MovieID', (req, res) => {
+                Users.findOneAndUpdate({ Username: req.params.Username }, {
+                  $pull: { FavoriteMovies: req.params.MovieID }
+                },
+                { new: true }, // This line makes sure that the updated document is returned
+               (err, updatedFavs) => {
+                 if (err) {
+                   console.error(err);
+                   res.status(500).send('Error: ' + err);
+                 } else {
+                   res.json(updatedFavs);
+                 }
+               });
+              });
+        </code>
+        <code>
+            {
+                "FavoriteMovies": "6060f576f71bd9e1cc6e8e73"
+            }
+        </code>
+    </pre>
+    <h4>Example Response</h4>
+    <pre>
+        <code>
+            {
+                "FavoriteMovies": [],
+                "_id": "6064b6751b9ebb2598d5d4ce",
+                "Username": "Donald Trump",
+                "Password": "donnie123",
+                "Email": "donnie@yoga-retreat-bali.com",
+                "Birthday": "+019554-12-31T23:00:00.000Z",
+                "__v": 0
+            }
+        </code>
+    </pre>
+
+    <h3>9. Allow existing users to deregister</h3>
+    <p>DELETE /users/[username]</p>
+    <h4>Request</h4>
+    <pre>
+        <code>
+            app.delete('/users/:Username', (req, res) => {
+                Users.findOneAndRemove({ Username: req.params.Username })
+                .then((user) => {
+                  if (!user) {
+                    res.status(400).send(req.params.Username + ' was not found.');
+                  } else {
+                    res.status(200).send(req.params.Username + 'was deleted.');
+                  }
+                })
+                .catch((err) => {
+                  console.error(err);
+                  res.status(500).send('Error: ' + err);
+                });
+               });
+        </code>
+    </pre>
+    <h4>Example Response</h4>
+    <pre>
+        <code>
+            Donald Trump was deleted.
+        </code>
+    </pre>
+
 </body>
 </html>
