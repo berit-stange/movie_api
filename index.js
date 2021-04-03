@@ -14,6 +14,9 @@ app.use(morgan('common')); //invokes middleware function
 app.use(express.static('public')); //serving static files
 app.use(bodyParser.json());
 
+let auth = require('./auth')(app); //import “auth.js” file
+const passport = require('passport'); //require the Passport module
+require('./passport'); //import the “passport.js” file
 
 
 app.get('/', (req, res) => {
@@ -22,7 +25,8 @@ app.get('/', (req, res) => {
 
 
 //1. Return a list of ALL movies --- //GET /movies
-app.get('/movies', (req, res) => {
+app.get('/movies', passport.authenticate('jwt', { session: false }),
+(req, res) => {
     Movies.find()
     .then((movies) => {
       res.status(201).json(movies);
