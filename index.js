@@ -131,7 +131,7 @@ app.post('/users',
 });
 
 //6. Allow users to update their user info (username) --- //PUT /users/[username]
-app.put('/users/:Username', 
+app.put('/users/:Username', passport.authenticate('jwt', { session: false }),
 (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, {$set:
     {
