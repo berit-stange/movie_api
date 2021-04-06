@@ -13,7 +13,7 @@ const app = express(); // configure webs server + route HTTP requests and respon
 app.use(morgan('common')); //invokes middleware function
 app.use(express.static('public')); //serving static files
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors()); //allows all domains to make requests
 
 let auth = require('./auth')(app); //import “auth.js” file
 const passport = require('passport'); //require the Passport module
@@ -52,6 +52,7 @@ app.get('/movies/:Title', passport.authenticate('jwt', { session: false }),
   });
 });
 
+
 //3. Return data about a genre (description) by name --- //GET /movies/genres/[name]
 app.get('/movies/genres/:Name', passport.authenticate('jwt', { session: false }),
 (req, res) => {
@@ -65,6 +66,7 @@ app.get('/movies/genres/:Name', passport.authenticate('jwt', { session: false })
     });
   });
 
+
 //4. Return data about a director (bio, birth year, death year, work) by name --- //GET  /movies/[director]/[name]
 app.get('/movies/directors/:Name', passport.authenticate('jwt', { session: false }),
 (req, res) => {
@@ -77,6 +79,7 @@ app.get('/movies/directors/:Name', passport.authenticate('jwt', { session: false
       res.status(500).send('Error: ' + err);
     });
   });
+
 
 //5. Allow new users to register --- //POST  /users
 app.post('/users',
@@ -116,6 +119,7 @@ app.post('/users',
   });
 });
 
+
 //6. Allow users to update their user info (username) --- //PUT /users/[username]
 app.put('/users/:Username', 
 [
@@ -151,6 +155,7 @@ passport.authenticate('jwt', { session: false }),
   });
 });
 
+
 //7. Allow users to add a movie to their list of favorites --- //POST /users/[username]/favorites
 app.post('/users/:Username/favorites/:MovieID', passport.authenticate('jwt', { session: false }),
 (req, res) => {
@@ -168,6 +173,7 @@ app.post('/users/:Username/favorites/:MovieID', passport.authenticate('jwt', { s
   });
 });
 
+
 //8. Allow users to remove a movie from their list of favorites --- //DELETE	/users/[username]/favorites
 app.delete('/users/:Username/favorites/:MovieID', passport.authenticate('jwt', { session: false }),
 (req, res) => {
@@ -184,6 +190,7 @@ app.delete('/users/:Username/favorites/:MovieID', passport.authenticate('jwt', {
    }
  });
 });
+
 
 //9. Allow existing users to deregister --- //DELETE	/users/[username]
 app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
