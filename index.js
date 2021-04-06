@@ -7,14 +7,13 @@ const Movies = Models.Movie;
 const Users = Models.User;
 mongoose.connect('mongodb://localhost:27017/moviesDB', { useNewUrlParser: true, useUnifiedTopology: true });
 const cors = require('cors');
-app.use(cors());
 const {check, validationResult } = require('express-validator');
-
 const app = express(); // configure webs server + route HTTP requests and responses
 
 app.use(morgan('common')); //invokes middleware function
 app.use(express.static('public')); //serving static files
 app.use(bodyParser.json());
+app.use(cors());
 
 let auth = require('./auth')(app); //import “auth.js” file
 const passport = require('passport'); //require the Passport module
