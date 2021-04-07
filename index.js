@@ -1,6 +1,6 @@
 const express = require('express'); //imports express module locally
-const morgan = require('morgan'); //imports Morgan for logging
-const bodyParser = require('body-parser'); 
+const morgan = require('morgan'); //imports Morgan middleware for logging
+const bodyParser = require('body-parser'); //Body parser for JSON Objects
 const mongoose = require('mongoose');
 const Models = require('./models.js');
 const Movies = Models.Movie;
@@ -89,7 +89,7 @@ app.post('/users',
   check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
   check('Password', 'Password is required').not().isEmpty(),
   check('Email', 'Email does not appear to be valid').isEmail(),
-  check('Birthday', 'Birthday must be a date').isDate({ format: 'YYYY-MM-DD'})
+  // check('Birthday', 'Birthday must be a date').isDate({ format: 'YYYY-MM-DD'})
 ], (req, res) => {
   let errors = validationResult(req);
   if (!errors.isEmpty()) {
