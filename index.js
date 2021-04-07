@@ -7,14 +7,14 @@ const Movies = Models.Movie;
 const Users = Models.User;
 // mongoose.connect('mongodb://localhost:27017/moviesDB', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-const cors = require('cors');
+const cors = require('cors'); //allows all domains to make requests
 const {check, validationResult } = require('express-validator');
 const app = express(); // configure webs server + route HTTP requests and responses
 
 app.use(morgan('common')); //invokes middleware function
 app.use(express.static('public')); //serving static files
 app.use(bodyParser.json());
-app.use(cors()); //allows all domains to make requests
+app.use(cors()); 
 
 let auth = require('./auth')(app); //import “auth.js” file
 const passport = require('passport'); //require the Passport module
@@ -23,19 +23,6 @@ require('./passport'); //import the “passport.js” file
 
 app.get('/', (req, res) => {
     res.send('Welcome to my movieApp');
-});
-
-
-//Get all users --- only for internal use 
-app.get('/users', (req,res) => {
-  Users.find()
-  .then((users) => {
-    res.status(201).json(users);
-  })
-  .catch((err) => {
-    console.error(err);
-    res.status(500).send('Error ' + err);
-  });
 });
 
 
