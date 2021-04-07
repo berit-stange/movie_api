@@ -121,7 +121,22 @@ app.post('/users',
 });
 
 
-//6. Allow users to update their user info (username) --- //PUT /users/[username]
+//6. Get user by username  --- //GET /users/[username]
+app.get('/users/:Username', passport.authenticate('jwt', { session: false }),
+(req, res) => {
+  Users.findOne({ Username: req.params.Username })
+  .then((user) => {
+    res.json(user);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send('Error: ' + err);
+  });
+});
+
+
+
+//7. Allow users to update their user info (username) --- //PUT /users/[username]
 app.put('/users/:Username', 
 [
    check('Username', 'Username is required').isLength({min: 5}),
@@ -157,7 +172,7 @@ passport.authenticate('jwt', { session: false }),
 });
 
 
-//7. Allow users to add a movie to their list of favorites --- //POST /users/[username]/favorites
+//8. Allow users to add a movie to their list of favorites --- //POST /users/[username]/favorites
 app.post('/users/:Username/favorites/:MovieID', passport.authenticate('jwt', { session: false }),
 (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, {
@@ -175,7 +190,7 @@ app.post('/users/:Username/favorites/:MovieID', passport.authenticate('jwt', { s
 });
 
 
-//8. Allow users to remove a movie from their list of favorites --- //DELETE	/users/[username]/favorites
+//9. Allow users to remove a movie from their list of favorites --- //DELETE	/users/[username]/favorites
 app.delete('/users/:Username/favorites/:MovieID', passport.authenticate('jwt', { session: false }),
 (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, {
@@ -193,7 +208,7 @@ app.delete('/users/:Username/favorites/:MovieID', passport.authenticate('jwt', {
 });
 
 
-//9. Allow existing users to deregister --- //DELETE	/users/[username]
+//10. Allow existing users to deregister --- //DELETE	/users/[username]
 app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
 (req, res) => {
   Users.findOneAndRemove({ Username: req.params.Username })
