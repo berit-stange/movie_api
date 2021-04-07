@@ -22,7 +22,7 @@ require('./passport'); //import the “passport.js” file
 
 
 app.get('/', (req, res) => {
-    res.send('Welcome to my incredible MOVIE APP');
+    res.send('Welcome to movieApp');
 });
 
 
