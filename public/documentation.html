@@ -68,28 +68,34 @@
                 <td>JSON object containing user data that was just added</td>
             </tr>
             <tr>
-                <td>6. Allow users to update their user info (username)</td>
+                <td>6. Return data of a specific user info by Name</td>
+                <td>/users/[username]</td>
+                <td>GET</td>
+                <td>JSON object containing user data</td>
+            </tr>
+            <tr>
+                <td>7. Allow users to update their user info (username)</td>
                 <td>/users/[username]</td>
                 <td>PUT</td>
                 <td>JSON object containing user data</td>
                 <td>JSON object containing user data that was just updated</td>
             </tr>
             <tr>
-                <td>7. Allow users to add a movie to their list of favorites</td>
+                <td>8. Allow users to add a movie to their list of favorites</td>
                 <td>/users/[username]/favorites</td>
                 <td>POST</td>
                 <td>JSON object containing movie data</td>
                 <td>JSON object containing movie data that was just added</td>
             </tr>
             <tr>
-                <td>8. Allow users to remove a movie from their list of favorites</td>
+                <td>9. Allow users to remove a movie from their list of favorites</td>
                 <td>/users/[username]/favorites</td>
                 <td>DELETE</td>
                 <td>---</td>
                 <td>A text message saying the movie was successfully deleted</td>
             </tr>
             <tr>
-                <td>9. Allow existing users to deregister</td>
+                <td>10. Allow existing users to deregister</td>
                 <td>/users/[username]</td>
                 <td>DELETE</td>
                 <td>---</td>
@@ -323,7 +329,30 @@
         </code>
     </pre>
 
-    <h3>6. Allow users to update their user info (username)</h3>
+    <h3>6. Return data of a specific user info by Name</h3>
+    <p>GET /users/[username]</p>
+        <code>
+            {
+                "Username": "Donald Trump",
+                "Password": "donnie123",
+                "Email": "donnie@yoga-retreat-bali.com",
+                "Birthday": "+019554-12-31T23:00:00.000Z"
+            }
+        </code>
+    </pre>
+    <h4>Example Response</h4>
+    <pre>
+        <code>
+            {
+                "Username": "Donald Trump",
+                "Password": "donnie123",
+                "Email": "donnie@yoga-retreat-bali.com",
+                "Birthday": "+019554-12-31T23:00:00.000Z"
+            }
+        </code>
+    </pre>
+
+    <h3>7. Allow users to update their user info (username)</h3>
     <p>PUT /users/[username]</p>
     <h4>Request</h4>
     <pre>
@@ -369,7 +398,7 @@
         </code>
     </pre>
 
-    <h3>7. Allow users to add a movie to their list of favorites</h3>
+    <h3>8. Allow users to add a movie to their list of favorites</h3>
     <p>	POST /users/[username]/favorites/[movieid]</p>
     <h4>Request</h4>
     <pre>
@@ -412,7 +441,7 @@
         </code>
     </pre>
 
-    <h3>8. Allow users to remove a movie from their list of favorites</h3>
+    <h3>9. Allow users to remove a movie from their list of favorites</h3>
     <p>DELETE /users/[username]/favorites/[movieid]</p>
     <h4>Request</h4>
     <pre>
@@ -453,7 +482,7 @@
         </code>
     </pre>
 
-    <h3>9. Allow existing users to deregister</h3>
+    <h3>10. Allow existing users to deregister</h3>
     <p>DELETE /users/[username]</p>
     <h4>Request</h4>
     <pre>
