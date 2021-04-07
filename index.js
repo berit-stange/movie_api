@@ -26,6 +26,20 @@ app.get('/', (req, res) => {
 });
 
 
+//Get all users --- only for internal use 
+app.get('/users', 
+(req,res) => {
+  Users.find()
+  .then((users) => {
+    res.status(201).json(users);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send('Error ' + err);
+  });
+});
+
+
 //1. Return a list of ALL movies --- //GET /movies
 app.get('/movies', passport.authenticate('jwt', { session: false }),
 (req, res) => {
