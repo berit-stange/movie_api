@@ -27,8 +27,7 @@ app.get('/', (req, res) => {
 
 
 //Get all users --- only for internal use 
-app.get('/users', 
-(req,res) => {
+app.get('/users', (req,res) => {
   Users.find()
   .then((users) => {
     res.status(201).json(users);
