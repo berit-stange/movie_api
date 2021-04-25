@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 
 //1. Return a list of ALL movies --- //GET /movies
 app.get('/movies',
-//   passport.authenticate('jwt', { session: false }),
+   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     Movies.find()
       .then((movies) => {
