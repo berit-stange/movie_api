@@ -175,9 +175,9 @@ app.put('/users/:Username',
 
 
 //8. Allow users to add a movie to their list of favorites --- //POST /users/[username]/favorites
-//app.post('/users/:Username/favorites/:MovieID', passport.authenticate('jwt', { session: false }),
 //app.post('/users/:Username/favorites', passport.authenticate('jwt', { session: false }),
-app.post('/users/:Username', passport.authenticate('jwt', { session: false }),
+//app.post('/users/:Username', passport.authenticate('jwt', { session: false }),
+app.post('/users/:Username/favorites/:MovieID', passport.authenticate('jwt', { session: false }),
   (req, res) => {
     Users.findOneAndUpdate({ Username: req.params.Username }, {
       $push: { FavoriteMovies: req.params.MovieID }
