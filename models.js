@@ -1,9 +1,13 @@
 const mongoose = require('mongoose');
 
 //Defining the Schema
+/** @constant
+ * @name movieSchema
+ * @description mongoose movies schema
+ */
 let movieSchema = mongoose.Schema({
-    Title: {type: String, required: true},
-    Description: {type: String, required: true},
+    Title: { type: String, required: true },
+    Description: { type: String, required: true },
     Genre: {
         Name: String,
         Description: String
@@ -13,28 +17,32 @@ let movieSchema = mongoose.Schema({
         Bio: String,
         Birth: String,
         Death: String,
-        Movies: [{type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }]
+        Movies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }]
     },
     Actors: [String],
     ImagePath: String,
-    Featured: Boolean 
+    Featured: Boolean
 });
 
 const bcrypt = require('bcrypt');
 
+/** @constant
+ * @name userSchema
+ * @description mongoose users schemajsdoc models.js
+ */
 let userSchema = mongoose.Schema({
-    Username: {type: String, required: true},
-    Password: {type: String, required: true},
-    Email: {type: String, required: true},
+    Username: { type: String, required: true },
+    Password: { type: String, required: true },
+    Email: { type: String, required: true },
     Birthday: Date,
-    FavoriteMovies: [{type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }]
+    FavoriteMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }]
 });
 
 userSchema.statics.hashPassword = (password) => {
     return bcrypt.hashSync(password, 10);
 };
 
-userSchema.methods.validatePassword = function(password) { //used in callback in passport.js?
+userSchema.methods.validatePassword = function (password) { //used in callback in passport.js?
     return bcrypt.compareSync(password, this.Password);
 };
 
