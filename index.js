@@ -14,7 +14,18 @@ const app = express(); // configure webs server + route HTTP requests and respon
 app.use(morgan('common')); //invokes middleware function
 app.use(express.static('public')); //serving static files
 app.use(bodyParser.json());
-app.use(cors());
+// app.use(cors());
+let allowedOrigins = ["http://localhost:8080', 'https://https://mymovies-app.netlify.app/"];
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) { // If a specific origin isn’t found on the list of allowed origins
+      let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
+      return callback(new Error(message), false);
+    }
+    return callback(null, true);
+  }
+}));
 
 let auth = require('./auth')(app); //import “auth.js” file
 const passport = require('passport'); //require the Passport module
