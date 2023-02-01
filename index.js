@@ -7,15 +7,17 @@ const Movies = Models.Movie;
 const Users = Models.User;
 // mongoose.connect('mongodb://localhost:27017/moviesDB', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-const cors = require('cors'); //allows all domains to make requests
+
 const { check, validationResult } = require('express-validator');
 const app = express(); // configure webs server + route HTTP requests and responses
 
 app.use(morgan('common')); //invokes middleware function
 app.use(express.static('public')); //serving static files
 app.use(bodyParser.json());
+
+const cors = require('cors'); //allows all domains to make requests
 // app.use(cors());
-let allowedOrigins = ["http://localhost:8080', 'https://https://mymovies-app.netlify.app/"];
+let allowedOrigins = ["http://localhost:8080', 'https://mymovies-app.netlify.app/"];
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin) return callback(null, true);
