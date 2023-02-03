@@ -6,7 +6,7 @@ const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 // mongoose.connect('mongodb://localhost:27017/moviesDB', { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connect('process.env.CONNECTION_URI', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const { check, validationResult } = require('express-validator');
 const app = express(); // configure webs server + route HTTP requests and responses
